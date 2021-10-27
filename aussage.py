@@ -1,17 +1,25 @@
 class Aussage:
     wertDarstellung = "binär"
     def __init__(self, value):
-        match value:
-            case True: self.value = value      
-            case False: self.value = value
-            case "0": self.value = False
-            case "1": self.value = True
-            case "f": self.value = False
-            case "w": self.value = True
-            case "false": self.value = False
-            case "true": self.value = True
-            case _: print(f"ERROR: DER WERT {value} ist für eine Aussage nicht zulässig! Zulässig sind: 0, f, false, 1, w, true")
-        
+        if value == True:
+            self.value = value
+        elif value == False:
+            self.value = False
+        elif value == "true":
+            self.value = True
+        elif value == "false":
+            self.value = False
+        elif value == "1":
+            self.value = True
+        elif value == "0":
+            self.value = False
+        elif value == "w":
+            self.value = True
+        elif value == "f":
+            self.value = False
+        else:
+            print(f"ERROR: DER WERT {value} ist für eine Aussage nicht zulässig! Zulässig sind: 0, f, false, 1, w, true")
+    
     def nicht(self):
         if self.value:
             return Aussage(False)

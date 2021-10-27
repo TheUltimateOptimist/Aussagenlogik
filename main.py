@@ -31,7 +31,7 @@ def main():
 
 def welcomeUser():
     console.print("created by Jonthan Dück")
-    link = Text("https://github.com/TheUltimateOptimist/Matrizen", "underline")
+    link = Text("https://github.com/TheUltimateOptimist/Aussagenlogik", "underline")
     console.print(Text("Source Code: ").append(link))
     console.print(Text("Wilkommen!", "bold green"))
     console.print(Text("Um zu erfahren wie dieses Tool funktioniert, gib 'erkläre' ein, und drücke Enter!", "bold green"))

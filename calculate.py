@@ -1,6 +1,7 @@
 from tokenizer import Tokenizer
 from listHelper import split_list, delete_range, getClosingBraceIndex
 from my_console import console
+from rich.text import Text
 
 def evaluateTokenList(tokenList):
         i = 0
@@ -45,5 +46,5 @@ def calculate(expression, shouldPrint = False, tafel = False, numberOfVariables 
     else:
         result = evaluateTokenList(Tokenizer(expression).tokenize())
     if shouldPrint:
-        console.print(result.stringValue())
+        console.print(Text(result.stringValue(), "bold green"))
     return result

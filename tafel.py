@@ -1,6 +1,7 @@
 from aussage import Aussage
 from calculate import calculate
 from my_console import console
+import printTable
 
 def addRowStatement(index, numberOfVariables, expressions):
     valueList = []
@@ -8,16 +9,16 @@ def addRowStatement(index, numberOfVariables, expressions):
     if identifier > 0:
         for i in range(numberOfVariables):
             if i < identifier:
-                valueList.append(Aussage(True))
+                valueList.append(Aussage("true"))
             else:
-                valueList.append(Aussage(False))  
+                valueList.append(Aussage("false"))  
     else:
         identifier += numberOfVariables   
         for i in range(numberOfVariables):
             if i < identifier:
-                valueList.append(Aussage(False))  
+                valueList.append(Aussage("false"))  
             else: 
-                valueList.append(Aussage(True))
+                valueList.append(Aussage("true"))
     variableValueList = valueList
     for expression in expressions:
         valueList.append(calculate(expression, False, True, numberOfVariables, variableValueList))
@@ -55,8 +56,8 @@ def printTafel():
             file.write(f"table.add_column('{expression}')\n")
         for i in range(2*numberOfVariables):
             file.write(addRowStatement(i, numberOfVariables, expressions))
-        file.write("console = Console()\n")
         file.write("console.print(table)\n")
-    import printTable
     import importlib
     importlib.reload(printTable)
+    with open("printTable.py", "w") as file:
+        file.write("")
