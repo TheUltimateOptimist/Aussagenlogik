@@ -4,9 +4,9 @@ from calculate import calculate
 from aussage import Aussage
 from rich.text import Text
 from my_console import console
+from language import erklaerung
 def erklaere():
-    with open("erklaerung.txt", mode="r", encoding="utf8") as file:
-        console.print(Text("".join(file.readlines()), "bold rgb(255,253,208)"))
+    console.print(Text("\n".join(erklaerung.split("-n-")), "bold cyan"))
 
 def evaluateInput(text):
     if text == "erkläre":
@@ -27,6 +27,7 @@ def evaluateInput(text):
 def main():
     operation = input(">: ")
     evaluateInput(operation.strip())
+    # console.print(Text("Ungültige Eingabe", "bold red"))
     main()
 
 def welcomeUser():

@@ -1,9 +1,9 @@
 from aussage import Aussage
 from calculate import calculate
 from my_console import console
-import printTable
+from print_table import printTable
 
-def addRowStatement(index, numberOfVariables, expressions):
+def row(index, numberOfVariables, expressions):
     valueList = []
     identifier = numberOfVariables - index
     if identifier > 0:
@@ -22,11 +22,9 @@ def addRowStatement(index, numberOfVariables, expressions):
     variableValueList = valueList
     for expression in expressions:
         valueList.append(calculate(expression, False, True, numberOfVariables, variableValueList))
-    additionLine = "table.add_row("
-    for element in valueList:
-        additionLine+=f"'{element.stringValue()}', "
-    additionLine+=")\n"       
-    return additionLine
+    for i,element in enumerate(valueList):
+        valueList[i] = element.stringValue()  
+    return valueList
 
 def printTafel():
     numberOfVariables = int(input(">Gib die Anzahl der vorkommenden Variablen ein: "))
@@ -47,17 +45,12 @@ def printTafel():
         if text != "s":
             expressions.append(text)
         i += 1
-    with open("printTable.py", mode="w") as file:
-        file.write("from rich.table import Table\nfrom my_console import console\n\ntable = Table(header_style='bold green')\n")
-    with open("printTable.py", "a") as file:
-        for i in range(numberOfVariables):
-            file.write(f"table.add_column(chr({65 + i}))\n")
-        for expression in expressions:
-            file.write(f"table.add_column('{expression}')\n")
-        for i in range(2*numberOfVariables):
-            file.write(addRowStatement(i, numberOfVariables, expressions))
-        file.write("console.print(table)\n")
-    import importlib
-    importlib.reload(printTable)
-    with open("printTable.py", "w") as file:
-        file.write("")
+    list = []
+    for i in range(numberOfVariables*2):
+        list.append(row(i, numberOfVariables, expressions))
+    columns = []
+    for i in range(numberOfVariables):
+        columns.append(chr(65 + i))
+    for expression in expressions:
+        columns.append(expression)
+    printTable(list, columns, "green", ["white"], "white")
