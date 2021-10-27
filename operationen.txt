@@ -1,0 +1,23 @@
+>: befehle    |--> gibt alle definierten Befehle aus
+>: erkläre    |--> gibt eine erklärung der Funktionsweise dieses Tools aus
+
+>: binär      |--> ändert die Darstellung von Aussagewerten zu 0 und 1
+>: wf         |--> ändert die Darstellung von Aussagewerten zu w und f
+>: truefalse  |--> ändert die Darstellung von Aussagewerten zu true und false
+
+>: [Aussagenname] = [Aussagenwert]
+  -> speichert den Wert einer bestimmten Aussage
+  -> über den Aussagennamen kann der Wert in weiteren Befehlen benutzt werden
+  -> [Aussagenname] muss durch einen beliebigen Namen ersetzt werden
+  -> [Aussagenwert] muss durch 1, w, true, 0, f, false oder einen Aussagenausdruck der sich zu einem der Werte auflösen lässt ersetzt werden 
+
+Junktoren
+>: ... und ...
+>: ... oder ...
+>: ... xor ...
+>: ... folgt ...
+  -> verbinden zwei Aussagen zu einer neuen Aussage
+>: nicht ...
+  -> negiert eine Aussage
+
+>: tafel    |--> lässt dich eine Wahrheitstafel erstellen
