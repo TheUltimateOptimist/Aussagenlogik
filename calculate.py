@@ -51,11 +51,3 @@ def calculate(expression, shouldPrint = False, tafel = False, numberOfVariables 
     if shouldPrint:
         console.print(Text(result.stringValue(), "bold green"))
     return result
-
-#Variables.add("A", "0")
-ob = []
-for i in range(15):
-    Variables.add(chr(65 + i), Aussage("0"))  
-for i in range(2**15):
-    calculate("nicht(A)")
-print("done")

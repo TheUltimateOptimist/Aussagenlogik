@@ -8,6 +8,7 @@ class Tokenizer:
         self.aussagenObjects = aussagenObjects
         self.expression = expression
         self.tafel = tafel
+        print(operations)
         if not tafel:
             self.words = operations + values + Variables.names
         else:
