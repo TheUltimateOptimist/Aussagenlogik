@@ -26,10 +26,11 @@ def evaluateInput(text):
 
 def main():
     operation = input(">: ")
-    try:
-        evaluateInput(operation.strip())
-    except:
-        console.print(Text("Ungültige Eingabe", "bold red"))
+    # try:
+    #     evaluateInput(operation.strip())
+    # except:
+    #     console.print(Text("Ungültige Eingabe", "bold red"))
+    evaluateInput(operation.strip())
     main()
 
 def welcomeUser():
