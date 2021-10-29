@@ -7,13 +7,15 @@ class Tokenizer:
         self.numberOfVariables = numberOfVariables
         self.aussagenObjects = aussagenObjects
         self.expression = expression
+        self.tafel = tafel
         if not tafel:
             self.words = operations + values + Variables.names
         else:
-            self.words = operations
+            self.words = []
+            for operation in operations:
+                self.words.append(operation)
             for i in range(numberOfVariables):
                 self.words.append(chr(65 + i))
-        self.tafel = tafel
     def __isWord(self, textString):
         for word in self.words:
             if word == textString:
@@ -68,9 +70,6 @@ class Tokenizer:
                 list.insert(i, "(")
         return list
 
-
-
-    
     def tokenize(self):
         resultList = []
         word = ""
