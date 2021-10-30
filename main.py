@@ -34,6 +34,7 @@ def main():
     main()
 
 def welcomeUser():
+    console.print("Version 1.0.1")
     console.print("created by Jonthan Dück")
     link = Text("https://github.com/TheUltimateOptimist/Aussagenlogik", "underline")
     console.print(Text("Source Code: ").append(link))
