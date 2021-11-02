@@ -59,7 +59,10 @@ class Tokenizer:
             return list
     def __braceNichtTokens(self, list):
         for i,element in enumerate(list):
-            if (element == "nicht" and i == 0) or (element == "nicht" and list[i - 1] != "("):
+            if element == "nicht" and list[i + 1] == "nicht":
+                del list[i + 1]
+                del list[i]
+            elif (element == "nicht" and i == 0) or (element == "nicht" and list[i - 1] != "("):
                 closingBraceIndex = i + 2
                 if list[i + 1] == "(":
                     closingBraceIndex = getClosingBraceIndex(i + 1,list) + 1
