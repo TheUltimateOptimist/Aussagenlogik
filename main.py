@@ -13,8 +13,6 @@ def interpret(text: str):
     :parameter text: text to interpret
     """
 
-    # TODO: If we'd use Python 3.10+ we could use switch case statements here
-
     if text == "erkläre":
         console.print(Text("\n".join(erklaerung.split("-n-")), "bold cyan"))
     elif text == "befehle":
@@ -28,7 +26,7 @@ def interpret(text: str):
     elif text == "truefalse":
         Aussage.wertDarstellung = text
     elif "=" in text:
-        Variables.add(text.split("=")[0].strip(), evaluate(text.split("=")[1].strip()))
+        Variables.getInstance().add(text.split("=")[0].strip(), evaluate(text.split("=")[1].strip()))
     else:
         evaluate(text, True)
 
@@ -70,5 +68,6 @@ def welcomeUser():
 
 
 if __name__ == '__main__':
+    print(Variables.getInstance().values)
     welcomeUser()
     mainLoop()

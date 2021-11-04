@@ -1,4 +1,3 @@
-# index 1 and index 2 identify the part of the list that will be split of of the main list and returned
 from __future__ import annotations
 
 from aussage import Aussage

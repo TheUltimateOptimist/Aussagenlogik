@@ -24,7 +24,7 @@ class Tokenizer:
         self.expression = expression
         self.tafel = tafel
         if not tafel:
-            self.words = operations + values + Variables.names
+            self.words = operations + values + Variables.getInstance().names
         else:
             self.words = []
             for operation in operations:
@@ -94,8 +94,8 @@ class Tokenizer:
 
         if not self.tafel:
             for i, token in enumerate(list):
-                if Variables.contains(token):
-                    list[i] = Variables.getValue(token)
+                if Variables.getInstance().contains(token):
+                    list[i] = Variables.getInstance().getValue(token)
             for i, token in enumerate(list):
                 if self.__isValue(token):
                     list[i] = Aussage(token)
