@@ -7,6 +7,7 @@ class Aussage:
     """
 
     wertDarstellung: str = "binär"
+    value: bool = False
 
     def __init__(self, value: str | bool):
         """

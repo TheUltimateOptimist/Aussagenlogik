@@ -67,8 +67,6 @@ def printTafel():
             expressions.append(text)
         i += 1
     list = []
-    # import time
-    # start = time.time()
     for j in range(2 ** numberOfVariables):
         list.append(row(j, numberOfVariables, expressions))
     columns = []
@@ -76,6 +74,4 @@ def printTafel():
         columns.append(chr(65 + i))
     for expression in expressions:
         columns.append(expression)
-    # print(time.time() - start)
-    # time.sleep(20)
     printTable(list, columns, "green", ["white"], "white")
