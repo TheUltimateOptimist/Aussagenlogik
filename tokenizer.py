@@ -107,15 +107,18 @@ class Tokenizer:
                         list[i] = self.aussagenObjects[code - 65]
             return list
 
-    def __braceNichtTokens(self, list: list) -> list:
+    def __braceNichtTokens(self, list):
         """
         embraces all tokens that corresponds to a 'Nicht'-token
         :param list: the list of tokens where to work on
         :returns: the modified list
         """
-
-        for i, element in enumerate(list):
-            if (element == "nicht" and i == 0) or (element == "nicht" and list[i - 1] != "("):
+      
+        for i,element in enumerate(list):
+            if element == "nicht" and list[i + 1] == "nicht":
+                del list[i + 1]
+                del list[i]
+            elif (element == "nicht" and i == 0) or (element == "nicht" and list[i - 1] != "("):
                 closingBraceIndex = i + 2
                 if list[i + 1] == "(":
                     closingBraceIndex = getClosingBraceIndex(i + 1, list) + 1
