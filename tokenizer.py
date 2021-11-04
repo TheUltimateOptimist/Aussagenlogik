@@ -66,6 +66,7 @@ class Tokenizer:
 
         if len(text) == currentIndex + 1:
             return True
+
         code = ord(text[currentIndex + 1])
         if (code < 65 or code > 90) and (code < 97 or code > 122):
             return True
@@ -113,8 +114,8 @@ class Tokenizer:
         :param list: the list of tokens where to work on
         :returns: the modified list
         """
-      
-        for i,element in enumerate(list):
+
+        for i, element in enumerate(list):
             if element == "nicht" and list[i + 1] == "nicht":
                 del list[i + 1]
                 del list[i]
