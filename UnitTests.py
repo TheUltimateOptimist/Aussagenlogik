@@ -110,7 +110,7 @@ class TokenizerTests(unittest.TestCase):
         value_2 = Aussage(False)
         tokenizer = Tokenizer("A oder nicht nicht nicht B", True, 2, [value_1, value_2])
         token_list = tokenizer.tokenize()
-        self.assertEqual([value_1, "oder", "(", "nicht", "nicht", "nicht", value_2, ")"], token_list)
+        self.assertEqual([value_1, "oder", "(", "nicht", value_2, ")"], token_list)
 
     def test_sequence_3(self):
         value_1 = Aussage(True)
