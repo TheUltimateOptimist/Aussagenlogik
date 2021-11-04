@@ -1,22 +1,41 @@
+from __future__ import annotations
+from typing import Any
 from termcolor import colored
 from colorama import init
 
 
-def toStringList(dimensions, list):
-    rList = []
+def toStringList(dimensions: int, inputList: list[Any | list[Any]]) -> list[str | list[str]]:
+    """
+    converts list to a list of string
+    :param dimensions: number of dimensions of list
+    :param inputList: the list to convert to a list of strings
+    :returns: the converted list of strings
+    """
+
+    resultList = []
     if dimensions == 1:
-        for l in list:
-            rList.append(str(l))
+        for l in inputList:
+            resultList.append(str(l))
     elif dimensions == 2:
-        for row in list:
+        for row in inputList:
             rowList = []
             for element in row:
                 rowList.append(str(element))
-            rList.append(rowList)
-    return rList
+            resultList.append(rowList)
+    return resultList
 
 
-def printTable(table, columnNames, columnNamesColor, entryColors, surroundingColor, showIndexes=False):
+def printTable(table: list[list[str]], columnNames: list[str], columnNamesColor: str, entryColors: list[str], surroundingColor: str, showIndexes: bool = False):
+    """
+    prints table to the console using the given options
+    :param table: the table to print to the console
+    :param columnNames: the names for the columns of table (for the header row)
+    :param columnNamesColor: color for the column names
+    :param entryColors: color for entry values of the table
+    :param surroundingColor: color of the table grid
+    :param showIndexes: adds indices to the table
+    """
+
     if len(entryColors) == 1:
         for i in range(len(table) - 1):
             entryColors.append(entryColors[0])
@@ -70,3 +89,4 @@ def printTable(table, columnNames, columnNamesColor, entryColors, surroundingCol
 
     # print end bar
     print(colored(topBar, surroundingColor))
+
