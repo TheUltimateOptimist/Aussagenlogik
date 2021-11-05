@@ -68,6 +68,5 @@ def welcomeUser():
 
 
 if __name__ == '__main__':
-    print(Variables.getInstance().values)
     welcomeUser()
     mainLoop()
