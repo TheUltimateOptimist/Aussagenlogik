@@ -59,7 +59,7 @@ def welcomeUser():
     """
     console.print("Version 1.0.2")
     console.print("created by Jonathan Dück")
-    console.print("contributers: Leon Gierschner")  # :D
+    console.print("contributors: Leon Gierschner")
     link = Text("https://github.com/TheUltimateOptimist/Aussagenlogik", "underline")
     console.print(Text("Source Code: ").append(link))
     console.print(Text("Willkommen!", "bold green"))
