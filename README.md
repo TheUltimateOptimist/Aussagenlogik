@@ -35,7 +35,7 @@ Wenn du sie öffnest gelangst du in ein Terminal, in dem du deine Berechnungen a
 
 8. Beispiele:
    1. Änderung der Darstellung der Aussagenwerte zu w und f: 
-      >: wf
+      >>: wf
    2. Änderung der Darstellung der Aussagenwerte zu 1 und 0: 
       >: binär
    3. Änderung der Darstellung der Aussagenwerte zu true und false: 
