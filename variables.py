@@ -1,26 +1,29 @@
 from __future__ import annotations
 from typing import Any
+from expression import Expression
 
 
 class Variables:
-    __instance = None
     """
     designated singleton class for storing variables:
         - holds variable names
         - and variable values
     """
+
+    __instance: Variables = None
+    names: list[str] = []
+    values: list[Any] = []
+
     def __init__(self):
-        if Variables.__instance != None:
+        if Variables.__instance is not None:
             raise Exception("This class is a singleton!")
-        else:
-            self.names: list[str] = []
-            self.values: list[Any] = []
-            Variables.__instance = self
+        self.names = []
+        self.values = []
 
     @staticmethod
-    def getInstance():
-        if Variables.__instance == None:
-            Variables()
+    def get_instance():
+        if Variables.__instance is None:
+            Variables.__instance = Variables()
         return Variables.__instance
 
     def add(self, name: str, value: Any) -> None:
@@ -61,7 +64,7 @@ class Variables:
                 return True
         return False
 
-    def getValue(self, name: str) -> Any | None:
+    def get_value(self, name: str) -> Expression | None:
         """
         get the value of the variable with the given name
         :param name: the name of the variable to get the value from
