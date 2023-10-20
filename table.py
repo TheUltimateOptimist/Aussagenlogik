@@ -1,11 +1,10 @@
 from __future__ import annotations
 from typing import Any
-from termcolor import colored
-from colorama import init
 from expression import Expression
 from globals import console
 from interpreter import Interpreter
-
+import rich.table as ui
+from rich.console import Console
 
 class Table:
 
@@ -84,7 +83,7 @@ class Table:
             columns.append(chr(65 + i))
         for expression in expressions:
             columns.append(expression)
-        Table.__print_table(table_elements, columns, "green", ["white"], "white")
+        Table.__print_table(table_elements, columns)
 
     @staticmethod
     def __row(index: int, number_of_variables: int, expressions: list[str]) -> list[str | Expression]:
@@ -106,69 +105,24 @@ class Table:
         return value_list
 
     @staticmethod
-    def __print_table(table: list[list[str]], column_names: list[str], column_names_color: str,
-                      entry_colors: list[str],
-                      surrounding_color: str, show_indices: bool = False):
+    def __print_table(table: list[list[str]], column_names: list[str], show_indices: bool = False):
         """
         prints table to the console using the given options
         :param table: the table to print to the console
         :param column_names: the names for the columns of table (for the header row)
-        :param column_names_color: color for the column names
-        :param entry_colors: color for entry values of the table
-        :param surrounding_color: color of the table grid
         :param show_indices: adds indices to the table
         """
 
-        if len(entry_colors) == 1:
-            for i in range(len(table) - 1):
-                entry_colors.append(entry_colors[0])
-        # table = toStringList(2, table)
         if show_indices:
-            column_names.reverse()
-            column_names.append("")
-            column_names.reverse()
+            column_names.insert(0, "")
             i = 1
             for row in table:
-                row.reverse()
-                row.append(str(i))
-                row.reverse()
+                row.insert(0, str(i))
                 i = i + 1
-        init()
-        # calculate max Lengths:
-        max_lengths = []
-        for i in range(len(column_names)):
-            maxLength = len(column_names[i])
-            for j in range(len(table)):
-                if len(table[j][i]) > maxLength:
-                    maxLength = len(table[j][i])
-            max_lengths.append(maxLength + 1)
 
-        # print table
-        # print top Bar
-        top_bar = "+"
-        for length in max_lengths:
-            top_bar = top_bar + length * "-" + "-+"
-        print(colored(top_bar, surrounding_color))
-
-        # print column names
-        s = colored("| ", surrounding_color)
-        i = 0
-        for element in column_names:
-            s = s + (f"{colored(element, column_names_color)}" +
-                     (max_lengths[i] - len(element)) * " " + colored("| ", surrounding_color))
-            i = i + 1
-        print(s)
-
-        # print bottomBar
-        print(colored(top_bar, surrounding_color))
-
-        # print entries
-        for i in range(len(table)):
-            entry = colored("| ", surrounding_color)
-            for j in range(len(column_names)):
-                entry = entry + colored(table[i][j], entry_colors[i]) + (
-                        max_lengths[j] - len(table[i][j])) * " " + colored("| ", surrounding_color)
-            print(entry)
-
-        # print end bar
-        print(colored(top_bar, surrounding_color))
+        ui_table = ui.Table()
+        for name in column_names:
+            ui_table.add_column(name)
+        for row in table:
+            ui_table.add_row(*row)
+        Console().print(ui_table)
