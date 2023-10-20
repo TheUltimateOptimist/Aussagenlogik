@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import Callable
 from rich.text import Text
 from expression import Expression
 from extended_list import ExtendedList
@@ -15,7 +16,6 @@ class Interpreter:
         :parameter token_list: a list of tokens from the tokenizer to evaluate
         :returns: the value the token list evaluates to
         """
-        print(token_list)
         i = 0
         while i < len(token_list):
             token = token_list[i]
@@ -26,30 +26,35 @@ class Interpreter:
                     del token_list[i + 1]
             i += 1
         i = 0
+        Interpreter.__traverse_not(token_list)
+        Interpreter.__traverse_double(token_list, "und", lambda a,b: a.and_(b))
+        Interpreter.__traverse_double(token_list, "oder", lambda a,b: a.or_(b))
+        Interpreter.__traverse_double(token_list, "folgt", lambda a,b: a.implies_(b))
+        Interpreter.__traverse_double(token_list, "xor", lambda a,b: a.xor_(b))
+        return token_list[0]
+
+    @staticmethod
+    def __traverse_not(token_list: list[str | Expression]) -> None:
+        i = 0
         while i < len(token_list):
             token = token_list[i]
-            if str(token.__class__) == "<class 'str'>" and token == "nicht":
+            if type(token) is str and token == "nicht":
                 token_list[i] = token_list[i + 1].not_()
                 del token_list[i + 1]
-            elif str(token.__class__) == "<class 'str'>" and token == "und":
-                token_list[i] = token_list[i - 1].and_(token_list[i + 1])
-                del token_list[i + 1]
-                del token_list[i - 1]
-            elif str(token.__class__) == "<class 'str'>" and token == "oder":
-                token_list[i] = token_list[i - 1].or_(token_list[i + 1])
-                del token_list[i + 1]
-                del token_list[i - 1]
-            elif str(token.__class__) == "<class 'str'>" and token == "xor":
-                token_list[i] = token_list[i - 1].xor_(token_list[i + 1])
-                del token_list[i + 1]
-                del token_list[i - 1]
-            elif str(token.__class__) == "<class 'str'>" and token == "folgt":
-                token_list[i] = token_list[i - 1].implies_(token_list[i + 1])
+            else:
+                i = i + 1
+
+    @staticmethod
+    def __traverse_double(token_list: list[str | Expression], keyword: str, calculate: Callable[[Expression, Expression], Expression]) -> None:
+        i = 0
+        while i < len(token_list):
+            token = token_list[i]
+            if type(token) is str and token == keyword:
+                token_list[i] = calculate(token_list[i - 1], token_list[i + 1])
                 del token_list[i + 1]
                 del token_list[i - 1]
             else:
-                i += 1
-        return token_list[0]
+                i = i + 1
 
     @staticmethod
     def evaluate(expression: str, should_print: bool = False, tafel: bool = False,
