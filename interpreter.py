@@ -15,14 +15,14 @@ class Interpreter:
         :parameter token_list: a list of tokens from the tokenizer to evaluate
         :returns: the value the token list evaluates to
         """
-
+        print(token_list)
         i = 0
         while i < len(token_list):
             token = token_list[i]
             if token == "(":
                 closing_brace_index = ExtendedList(token_list).get_closing_brace_index(i)
                 token_list[i] = Interpreter.evaluate_token_list(token_list[i + 1: closing_brace_index])
-                for j in range(closing_brace_index - i):
+                for _ in range(closing_brace_index - i):
                     del token_list[i + 1]
             i += 1
         i = 0
