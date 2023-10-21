@@ -57,8 +57,8 @@ class Table:
             - prints the resulting table to the console
         """
 
-        numberOfVariables = int(input(">Gib die Anzahl der vorkommenden Variablen ein: "))
-        outputString = ">Variablen: "
+        numberOfVariables = int(input("> Gib die Anzahl der vorkommenden Variablen ein: "))
+        outputString = "> Variablen: "
         for i in range(numberOfVariables):
             if i < numberOfVariables - 1:
                 outputString += f"{chr(65 + i)}, "
@@ -66,12 +66,12 @@ class Table:
                 outputString += f"{chr(65 + i)}"
         console.print(outputString)
         expressions = []
-        console.print(">Gib beliebig viele Ausdrücke mit den oben genannten Variablen ein")
-        console.print(">Gib s ein, wenn du keine Ausdrücke mehr eingeben möchtest")
+        console.print("> Gib beliebig viele Ausdrücke mit den oben genannten Variablen ein")
+        console.print("> Gib s ein, wenn du keine Ausdrücke mehr eingeben möchtest")
         text = ""
         i = 0
         while text != "s":
-            text = input(f">{i + 1}. Ausdruck: ")
+            text = input(f"> {i + 1}. Ausdruck: ")
             if text != "s":
                 expressions.append(text)
             i += 1

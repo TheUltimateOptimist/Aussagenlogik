@@ -22,8 +22,8 @@ class UserInterface:
                     UserInterface.interpret(operation)
             except KeyboardInterrupt:
                 canceled = True
-            # except Exception as exception:
-            #    console.print(Text("Ungültige Eingabe ('" + operation + "') -> '" + str(exception) + "'", "bold red"))
+            except Exception as exception:
+               console.print(Text("Ungültige Eingabe '" + operation + "'" , "bold red"))
 
     @classmethod
     def welcome_user(cls):
