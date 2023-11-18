@@ -114,18 +114,17 @@ class Tokenizer:
         :param tokens: where to replace all variables with its values
         :returns: the list with all variables replaced
         """
-
+        for i, token in enumerate(tokens):
+            if self.__is_value(token):
+                tokens[i] = Expression(token)
         if not self.table:
             for i, token in enumerate(tokens):
-                if Variables.get_instance().contains(token):
+                if type(token) is not Expression and Variables.get_instance().contains(token):
                     tokens[i] = Variables.get_instance().get_value(token)
-            for i, token in enumerate(tokens):
-                if self.__is_value(token):
-                    tokens[i] = Expression(token)
             return tokens
         else:
             for i, token in enumerate(tokens):
-                if len(token) == 1:
+                if type(token) is not Expression and len(token) == 1:
                     code = ord(token)
                     if 65 <= code <= 64 + self.number_of_variables:
                         tokens[i] = self.expression_objects[code - 65]
